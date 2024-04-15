@@ -4,22 +4,25 @@
 extern "C" {
 #endif
 #include "abus_port.h"
+#include "cvector.h"
+#include "afifo.h"
+
 #define MaxSize 10
 #define NullKey 0xFFFFFFFF
 #define ABUS_HASH_PRINTF printf
 #define ABUS_MALLOC malloc
-    // Á´±í½áµã
+    // é“¾è¡¨ç»“ç‚¹
     typedef struct LNode
     {
         const char* name;
         void* data;
         struct LNode* next;
-    }LNode, * LinkList; //LNode node; // ÉùÃ÷Ò»¸öµ¥¸ö½áµã        LinkList list; // ÉùÃ÷Ò»¸öÁ´±íµÄÖ¸Õë
+    }LNode, * LinkList; //LNode node; // å£°æ˜ä¸€ä¸ªå•ä¸ªç»“ç‚¹        LinkList list; // å£°æ˜ä¸€ä¸ªé“¾è¡¨çš„æŒ‡é’ˆ
 
-    // ¹şÏ£±í
+    // å“ˆå¸Œè¡¨
     typedef struct hashTable
     {
-        LinkList list;// ÉùÃ÷Ò»¸öÁ´±íµÄÖ¸Õë
+        LinkList list;// å£°æ˜ä¸€ä¸ªé“¾è¡¨çš„æŒ‡é’ˆ
         int count;
         int list_size;
     }hashTable;
@@ -30,6 +33,10 @@ extern "C" {
 
     }abusAcc_t;
 
+    typedef struct{
+        abusAcc_t*acc;
+        afifo_t* fifo;//è®¢é˜…è€…å¯é€‰ç‹¬ç«‹æ•°æ®ç¼“å­˜
+    }abus_subcriber;
     typedef struct abusTopic
     {
         const char* name;
