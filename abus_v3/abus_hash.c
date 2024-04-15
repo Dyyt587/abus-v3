@@ -3,19 +3,19 @@
 #include <math.h>
 
 
-// ³õÊ¼»¯¹şÏ£±í
+// åˆå§‹åŒ–å“ˆå¸Œè¡¨
 hashTable* HashTableInit(int size)
 {
     hashTable* H;
-    // ·ÖÅä¶à¸öÁ´±íÍ·½áµã¿Õ¼ä
+    // åˆ†é…å¤šä¸ªé“¾è¡¨å¤´ç»“ç‚¹ç©ºé—´
     H->list_size = (MaxSize > size ? MaxSize : size);
-    H->list = (LNode*)ABUS_MALLOC(H->list_size *sizeof(LNode));//·ÖÅä20¸öLNode´óµÄÔªËØ¿Õ¼ä 
+    H->list = (LNode*)ABUS_MALLOC(H->list_size *sizeof(LNode));//åˆ†é…20ä¸ªLNodeå¤§çš„å…ƒç´ ç©ºé—´ 
     H->count = 0;
     if (H->list == 0) {
         H->list_size = 0;
         return 0;
     }
-    // ³õÊ¼»¯Á´±íÍ·½áµã£¨Í·½áµã´æ´¢³õÊ¼Öµ£¬Á´±íºóĞò½áµã´æ´¢³åÍ»Öµ£©
+    // åˆå§‹åŒ–é“¾è¡¨å¤´ç»“ç‚¹ï¼ˆå¤´ç»“ç‚¹å­˜å‚¨åˆå§‹å€¼ï¼Œé“¾è¡¨ååºç»“ç‚¹å­˜å‚¨å†²çªå€¼ï¼‰
     int i;
     for (i = 0; i < H->list_size; i++)
     {
@@ -23,11 +23,11 @@ hashTable* HashTableInit(int size)
         H->list[i].data = 0;
         H->list[i].next = NULL;
     }
-    ABUS_HASH_PRINTF("ÒÑ³õÊ¼»¯¹şÏ£±í!\n");
+    ABUS_HASH_PRINTF("å·²åˆå§‹åŒ–å“ˆå¸Œè¡¨!\n");
     return H;
 }
 
-// ¶¨Òå¹şÏ£º¯Êı
+// å®šä¹‰å“ˆå¸Œå‡½æ•°
 unsigned int hashFunction(const char* str) {
     unsigned int hash = 0;
 
@@ -37,7 +37,7 @@ unsigned int hashFunction(const char* str) {
 
     return hash % MaxSize;
 }
-// ½»»»Á½¸ö½ÚµãµÄÊı¾İ
+// äº¤æ¢ä¸¤ä¸ªèŠ‚ç‚¹çš„æ•°æ®
 void swap(LNode* a, LNode* b) {
     const char* temp;
     temp = a->name;
@@ -48,7 +48,7 @@ void swap(LNode* a, LNode* b) {
 
 }
 
-// ¶ÔÁ´±í½øĞĞÃ°ÅİÅÅĞò
+// å¯¹é“¾è¡¨è¿›è¡Œå†’æ³¡æ’åº
 void bubbleSort(LNode* head) {
     if (head == NULL || head->next == NULL) {
         return;
@@ -73,49 +73,49 @@ void bubbleSort(LNode* head) {
     } while (swapped);
 }
 
-// ²åÈë¹Ø¼ü×Ö
+// æ’å…¥å…³é”®å­—
 void InsertHashKey(hashTable* H, const char* key, void* data)
 {
-    // ¸ù¾İ¹şÏ£º¯ÊıµÃµ½ÏÂ±êµØÖ·
+    // æ ¹æ®å“ˆå¸Œå‡½æ•°å¾—åˆ°ä¸‹æ ‡åœ°å€
     int address = hashFunction(key);
-    ABUS_HASH_PRINTF("\n²åÈë¹Ø¼ü×Ö %s, ¹şÏ£µØÖ· = %d\n", key, address);
+    ABUS_HASH_PRINTF("\næ’å…¥å…³é”®å­— %s, å“ˆå¸Œåœ°å€ = %d\n", key, address);
 
     if (H->list[address].name == (const char*)NullKey)
     {
-        // ÈôÎ´·¢Éú³åÍ»£¬ÔòÖ±½Ó¸³Öµ¸øÍ·½áµã
+        // è‹¥æœªå‘ç”Ÿå†²çªï¼Œåˆ™ç›´æ¥èµ‹å€¼ç»™å¤´ç»“ç‚¹
         H->list[address].name = key;
         H->list[address].data = data;
-        ABUS_HASH_PRINTF("²åÈëÏÂ±êµØÖ·[%d], ²åÈë³É¹¦!\n\n", address);
+        ABUS_HASH_PRINTF("æ’å…¥ä¸‹æ ‡åœ°å€[%d], æ’å…¥æˆåŠŸ!\n\n", address);
     }
     else
     {
-        // Èô·¢Éú³åÍ»£¬ÔòÔÚ¸ÃÍ·½áµãµÄÁ´±íÏÂ½øĞĞÍ·²å
-        // ´´½¨ĞÂ½áµã
+        // è‹¥å‘ç”Ÿå†²çªï¼Œåˆ™åœ¨è¯¥å¤´ç»“ç‚¹çš„é“¾è¡¨ä¸‹è¿›è¡Œå¤´æ’
+        // åˆ›å»ºæ–°ç»“ç‚¹
         LNode* s;
         s = (LNode*)ABUS_MALLOC(sizeof(LNode));
         s->name = key;
         s->data = data;
-        // Í·²å·¨²åÈë
-        s->next = H->list[address].next;//½«Í·½áµãµÄnext¸³Öµ¸øĞÂ½áµãµÄnext£¬ĞÂÖµÔÚÇ°Ãæ
+        // å¤´æ’æ³•æ’å…¥
+        s->next = H->list[address].next;//å°†å¤´ç»“ç‚¹çš„nextèµ‹å€¼ç»™æ–°ç»“ç‚¹çš„nextï¼Œæ–°å€¼åœ¨å‰é¢
         H->list[address].next = s;
 
         bubbleSort(H->list[address].next);
 
-        ABUS_HASH_PRINTF("²åÈëÏÂ±êµØÖ·[%d], ·¢Éú³åÍ»! ÒÑ²åÈë¸ÃµØÖ·µÄÁ´±íÏÂ\n\n", address);
+        ABUS_HASH_PRINTF("æ’å…¥ä¸‹æ ‡åœ°å€[%d], å‘ç”Ÿå†²çª! å·²æ’å…¥è¯¥åœ°å€çš„é“¾è¡¨ä¸‹\n\n", address);
     }
     H->count++;
 }
 
-// ²éÕÒ¹Ø¼ü×Ö
+// æŸ¥æ‰¾å…³é”®å­—
 void* SearchHashKey(hashTable H, const char* key)
 {
     int address = hashFunction(key);
-    // ¸ù¾İ¹şÏ£µØÖ·»ñÈ¡¶ÔÓ¦Á´±íµÄÍ·½áµã
+    // æ ¹æ®å“ˆå¸Œåœ°å€è·å–å¯¹åº”é“¾è¡¨çš„å¤´ç»“ç‚¹
     LNode* p = &H.list[address];
-    // ÔÚÁ´±íÖĞ²éÕÒ¹Ø¼ü×Ö
+    // åœ¨é“¾è¡¨ä¸­æŸ¥æ‰¾å…³é”®å­—
     while (p != NULL && strcmp(p->name, key) != 0)
     {
-        // ÏßĞÔÌ½²â
+        // çº¿æ€§æ¢æµ‹
         p = p->next;
     }
     return p->data;
@@ -124,7 +124,7 @@ void* SearchHashKey(hashTable H, const char* key)
 void DisplayHashTable(hashTable H)
 {
     int i;
-    ABUS_HASH_PRINTF("¹şÏ£±í£º\n**********************************\n");
+    ABUS_HASH_PRINTF("å“ˆå¸Œè¡¨ï¼š\n**********************************\n");
     for (i = 0; i < MaxSize; i++)
     {
         ABUS_HASH_PRINTF("%d\t", i);
