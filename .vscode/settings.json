@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "abus_port.h": "c"
+        "abus_port.h": "c",
+        "abus.h": "c",
+        "afifo.h": "c",
+        "all_check.h": "c"
     }
 }

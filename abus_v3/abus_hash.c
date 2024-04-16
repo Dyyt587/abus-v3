@@ -8,8 +8,9 @@ hashTable* HashTableInit(int size)
 {
     hashTable* H;
     // 分配多个链表头结点空间
+    H->list = (LNode*)ABUS_MALLOC((MaxSize > size ? MaxSize : size) *sizeof(LNode));
+    if(H==NULL)return NULL;
     H->list_size = (MaxSize > size ? MaxSize : size);
-    H->list = (LNode*)ABUS_MALLOC(H->list_size *sizeof(LNode));//分配20个LNode大的元素空间 
     H->count = 0;
     if (H->list == 0) {
         H->list_size = 0;
@@ -74,7 +75,7 @@ void bubbleSort(LNode* head) {
 }
 
 // 插入关键字
-void InsertHashKey(hashTable* H, const char* key, void* data)
+void HashTableInsert(hashTable* H, const char* key, void* data)
 {
     // 根据哈希函数得到下标地址
     int address = hashFunction(key);
@@ -107,7 +108,7 @@ void InsertHashKey(hashTable* H, const char* key, void* data)
 }
 
 // 查找关键字
-void* SearchHashKey(hashTable H, const char* key)
+void* HashTableSearch(hashTable H, const char* key)
 {
     int address = hashFunction(key);
     // 根据哈希地址获取对应链表的头结点
