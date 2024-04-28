@@ -36,9 +36,10 @@ int main()
 	};
 	abus_topic_t *topic1 = abus_topic_create("topic1", &cfg, "just a desc");
 	abus_topic_t *topic2 = abus_topic_create("topic2", &cfg, "just a desc");
+	cout << "sub start" << endl;
 
-	abus_subcribe("topic1", "acc1", &filter1, abus_subcribe_cb1);
-	//abus_subcribe("topicNULL", "acc1", &filter1, abus_subcribe_cb1);
+	//abus_subcribe("topic1", "acc1", &filter1, abus_subcribe_cb1);
+	abus_subcribe("topicNULL", "acc1", &filter1, abus_subcribe_cb1);
 
 	cout << "Hello CMake." << endl;
 	return 0;

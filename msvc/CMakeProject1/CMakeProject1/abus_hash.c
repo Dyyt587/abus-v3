@@ -128,13 +128,22 @@ void *HashTableSearch(hashTable* H, const char *key)
     // 根据哈希地址获取对应链表的头结点
     LNode *p = &H->list[address];
     // 在链表中查找关键字
-    while (p != NULL && strcmp(p->name, key) != 0)
+    while (p != NULL)
     {
         // 线性探测
+        if (p->name) {
+            if (strcmp(p->name, key) != 0) {
+                p = p->next;
+            }
+            else {
+                return p->data;
+            }
+        }
         p = p->next;
+ 
     }
-    if(p==NULL || strcmp(p->name, key) == 0)return NULL;
-    return p->data;
+    //if(p==NULL || strcmp(p->name, key) == 0)return NULL;
+    return NULL;
 }
 void HashTableRemove(hashTable *H, const char *key)
 {

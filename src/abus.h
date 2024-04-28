@@ -24,8 +24,10 @@ extern "C"
 #define ABUS_FREE free
 #define ABUS_ASSSERT(x) \
     while (!(x))        \
-    {                   \
+    {\
+        ABUS_HASH_PRINTF("assert failed\n");\
     }
+
     // 链表结点
     typedef struct LNode
     {

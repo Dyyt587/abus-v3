@@ -4,7 +4,7 @@
 
 # 将源代码添加到此项目的可执行文件。
 add_executable (abus_v3 "abus_v3.cpp" "abus_v3.h" "abus_topic.c" "abus_hash.c" "abus_acc.c" "abus.h" "abus_port.h" 
-"../aUnity/afifo/afifo.c" "../aUnity/cvector/cvector.c" "../aUnity/acheck/all_check.c")
+"../aUnity/afifo/afifo.c" "../aUnity/cvector/cvector.c" "../aUnity/acheck/all_check.c" "../aUnity/cvector/cvector.h")
 
 include_directories("../aUnity/alist" "../aUnity/afifo" "../aUnity/acheck" "../aUnity/cvector")
 if (CMAKE_VERSION VERSION_GREATER 3.12)

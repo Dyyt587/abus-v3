@@ -1,0 +1,44 @@
+[
+{
+  "directory": "C:/Users/33368/Documents/GitHub/abus-v3/src/build",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/abus_v3.dir/includes_C.rsp -O1 -g -o CMakeFiles\\abus_v3.dir\\abus_acc.c.obj -c C:\\Users\\33368\\Documents\\GitHub\\abus-v3\\src\\abus_acc.c",
+  "file": "C:/Users/33368/Documents/GitHub/abus-v3/src/abus_acc.c",
+  "output": "CMakeFiles/abus_v3.dir/abus_acc.c.obj"
+},
+{
+  "directory": "C:/Users/33368/Documents/GitHub/abus-v3/src/build",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/abus_v3.dir/includes_C.rsp -O1 -g -o CMakeFiles\\abus_v3.dir\\abus_hash.c.obj -c C:\\Users\\33368\\Documents\\GitHub\\abus-v3\\src\\abus_hash.c",
+  "file": "C:/Users/33368/Documents/GitHub/abus-v3/src/abus_hash.c",
+  "output": "CMakeFiles/abus_v3.dir/abus_hash.c.obj"
+},
+{
+  "directory": "C:/Users/33368/Documents/GitHub/abus-v3/src/build",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/abus_v3.dir/includes_C.rsp -O1 -g -o CMakeFiles\\abus_v3.dir\\abus_topic.c.obj -c C:\\Users\\33368\\Documents\\GitHub\\abus-v3\\src\\abus_topic.c",
+  "file": "C:/Users/33368/Documents/GitHub/abus-v3/src/abus_topic.c",
+  "output": "CMakeFiles/abus_v3.dir/abus_topic.c.obj"
+},
+{
+  "directory": "C:/Users/33368/Documents/GitHub/abus-v3/src/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/abus_v3.dir/includes_CXX.rsp -O0 -Werror -g -std=gnu++14 -o CMakeFiles\\abus_v3.dir\\abus_v3.cpp.obj -c C:\\Users\\33368\\Documents\\GitHub\\abus-v3\\src\\abus_v3.cpp",
+  "file": "C:/Users/33368/Documents/GitHub/abus-v3/src/abus_v3.cpp",
+  "output": "CMakeFiles/abus_v3.dir/abus_v3.cpp.obj"
+},
+{
+  "directory": "C:/Users/33368/Documents/GitHub/abus-v3/src/build",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/abus_v3.dir/includes_C.rsp -O1 -g -o CMakeFiles\\abus_v3.dir\\afifo.c.obj -c C:\\Users\\33368\\Documents\\GitHub\\abus-v3\\src\\afifo.c",
+  "file": "C:/Users/33368/Documents/GitHub/abus-v3/src/afifo.c",
+  "output": "CMakeFiles/abus_v3.dir/afifo.c.obj"
+},
+{
+  "directory": "C:/Users/33368/Documents/GitHub/abus-v3/src/build",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/abus_v3.dir/includes_C.rsp -O1 -g -o CMakeFiles\\abus_v3.dir\\all_check.c.obj -c C:\\Users\\33368\\Documents\\GitHub\\abus-v3\\src\\all_check.c",
+  "file": "C:/Users/33368/Documents/GitHub/abus-v3/src/all_check.c",
+  "output": "CMakeFiles/abus_v3.dir/all_check.c.obj"
+},
+{
+  "directory": "C:/Users/33368/Documents/GitHub/abus-v3/src/build",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/abus_v3.dir/includes_C.rsp -O1 -g -o CMakeFiles\\abus_v3.dir\\cvector.c.obj -c C:\\Users\\33368\\Documents\\GitHub\\abus-v3\\src\\cvector.c",
+  "file": "C:/Users/33368/Documents/GitHub/abus-v3/src/cvector.c",
+  "output": "CMakeFiles/abus_v3.dir/cvector.c.obj"
+}
+]

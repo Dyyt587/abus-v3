@@ -2,7 +2,7 @@
  * @Author: Dyyt587 67887002+Dyyt587@users.noreply.github.com
  * @Date: 2024-04-15 11:28:27
  * @LastEditors: Dyyt587 67887002+Dyyt587@users.noreply.github.com
- * @LastEditTime: 2024-04-23 16:59:34
+ * @LastEditTime: 2024-04-23 17:42:52
  * @FilePath: \abus-v3\abus_v3\abus_topic.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -13,7 +13,7 @@ static uint8_t is_init = 0;
 
 int abus_subcribe(const char *topic, const char *accounter, abus_filter *filter, abus_subcribe_cb cb)
 {
-    
+    abus_subcriber_t subcriber;
     abus_topic_t *top = abus_topic_find_by_name(topic);
     abus_acc_t *acc = abus_accounter_find_by_name(accounter);
     if (topic == NULL){
@@ -31,8 +31,14 @@ int abus_subcribe(const char *topic, const char *accounter, abus_filter *filter,
         ABUS_HASH_PRINTF("filter is not null load filter\n");
         subcriber.filter = *filter;
     }
-    //cv_pushback(top->subcribers, &subcriber);
-    HashTableInsert(top->sub_hash_table, accounter, &subcriber);
+    // if(top->subcribers){
+    //     cv_pushback(top->subcribers, &subcriber);
+    // }
+    // if(top->sub_hash_table){
+    //     HashTableInsert(top->sub_hash_table, accounter, &subcriber);
+    // }
+    //cvector_popback(top->subcribers, &subcriber);
+    // HashTableInsert(top->sub_hash_table, accounter, &subcriber);
     return 0;
 }
 
