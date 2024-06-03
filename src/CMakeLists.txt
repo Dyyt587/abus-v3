@@ -1,19 +1,22 @@
-﻿cmake_minimum_required(VERSION 3.10)  # 必须
-set(CMAKE_CXX_STANDARD 14)	# C++14
+﻿
+# Set the project name
+cmake_minimum_required (VERSION 3.7)
 
-project(abus_v3)  #工程名
+aux_source_directory(. ALL_SRCS)			# 添加当前目录下所有的源文件
 
-include_directories("/") # 头文件目录
-
-#link_directories("/usr/local/lib/") # 链接库目录
-
-aux_source_directory(. SRCS) # 源文件
-# aux_source_directory(./abc SRCS)
-
-set(CMAKE_C_FLAGS "-O1") # 设置C工程的 CFLAGS
-set(CMAKE_CXX_FLAGS "-O0 -Werror") # 设置C++ 工程的 CXX_FLAGS
-
-add_executable(${PROJECT_NAME} ${SRCS}) # 生成可执行文件，这里程序名即为功能名
+add_library(abus ${ALL_SRCS})
 
 
-# 下面使用install作为项目打包使用
+# Add support for installation
+include(CMakePackageConfigHelpers)
+
+include(GNUInstallDirs) 
+# Install headers
+install(DIRECTORY . DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} FILES_MATCHING PATTERN "*.h")
+# Install library
+install(TARGETS abus
+  EXPORT ${PROJECT_NAME}-targets
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)

@@ -2,13 +2,36 @@
 
 #include <math.h>
 
+// 定义回调函数类型
+
+// 遍历哈希表并调用回调函数
+void HashTableIterate(hashTable *H, HashIterCallback callback, void *userdata)
+{
+    int i;
+	LNode *node=0;
+    for (i = 0; i < H->list_size; i++)
+    {
+        ABUS_HASH_PRINTF("list[%d]\n", i);
+        node = &H->list[i];
+
+        while (node && node->name != (const char *)NullKey && strcmp(node->name,"heap")!=0)
+        {
+            callback(node->name, node->data, userdata);
+            node = node->next;
+        }
+			
+    }
+}
 // 初始化哈希表
 hashTable *HashTableInit(int size)
 {
-    hashTable *H=0;
+    hashTable *H = 0;
     H = (hashTable *)ABUS_MALLOC(sizeof(hashTable));
+    ABUS_MEMMSET(H, 0, sizeof(hashTable));
     // 分配多个链表头结点空间
     H->list = (LNode *)ABUS_MALLOC((MaxSize > size ? MaxSize : size) * sizeof(LNode));
+    ABUS_MEMMSET(H->list, 0, sizeof((MaxSize > size ? MaxSize : size) * sizeof(LNode)));
+
     if (H == NULL)
         return NULL;
     H->list_size = (MaxSize > size ? MaxSize : size);
@@ -95,12 +118,12 @@ void HashTableInsert(hashTable *H, const char *key, void *data)
     int address = hashFunction(key);
     ABUS_HASH_PRINTF("\ninsert key %s, hash addr = %d\n", key, address);
 
-    if (H->list[address].name == (const char *)NullKey)
+    if (H->list[address].name == (const char *)0)
     {
         // 若未发生冲突，则直接赋值给头结点
         H->list[address].name = key;
         H->list[address].data = data;
-        ABUS_HASH_PRINTF("inserted list[%d]!\n\n", address);
+        ABUS_HASH_PRINTF("inserted list[%d]! key:%s \n", address, key);
     }
     else
     {
@@ -108,21 +131,23 @@ void HashTableInsert(hashTable *H, const char *key, void *data)
         // 创建新结点
         LNode *s;
         s = (LNode *)ABUS_MALLOC(sizeof(LNode));
+        ABUS_MEMMSET(s, 0, sizeof(LNode));
+ 
         s->name = key;
         s->data = data;
         // 头插法插入
         s->next = H->list[address].next; // 将头结点的next赋值给新结点的next，新值在前面
         H->list[address].next = s;
 
-        bubbleSort(H->list[address].next);
+        // bubbleSort(H->list[address].next);
 
-        ABUS_HASH_PRINTF("insert[%d] and Conflicts!\n\n", address);
+        ABUS_HASH_PRINTF("insert[%d] key %s and Conflicts!\n", address, key);
     }
     H->count++;
 }
 
 // 查找关键字
-void *HashTableSearch(hashTable* H, const char *key)
+void *HashTableSearch(hashTable *H, const char *key)
 {
     int address = hashFunction(key);
     // 根据哈希地址获取对应链表的头结点
@@ -131,34 +156,41 @@ void *HashTableSearch(hashTable* H, const char *key)
     while (p != NULL)
     {
         // 线性探测
-        if(strcmp(p->name, key) != 0){
-            p = p->next;
-        }else{
-            return p->data;
+        if (p->name)
+        {
+            if (strcmp(p->name, key) != 0)
+            {
+            }
+            else
+            {
+                return p->data;
+            }
         }
+        p = p->next;
     }
-    //if(p==NULL || strcmp(p->name, key) == 0)return NULL;
+    // if(p==NULL || strcmp(p->name, key) == 0)return NULL;
     return NULL;
 }
 void HashTableRemove(hashTable *H, const char *key)
 {
-        int address = hashFunction(key);
+    int address = hashFunction(key);
     // 根据哈希地址获取对应链表的头结点
     LNode *p = &H->list[address];
-    LNode *last_p=0;
+    LNode *last_p = 0;
     // 在链表中查找关键字
     while (p != NULL && strcmp(p->name, key) != 0)
     {
         // 线性探测
-        last_p=p;
+        last_p = p;
         p = p->next;
     }
-    if(p){
-        last_p->next=p->next;
+    if (p)
+    {
+        last_p->next = p->next;
     }
 }
 
-void DisplayHashTable(hashTable* H)
+void DisplayHashTable(hashTable *H)
 {
     int i;
     ABUS_HASH_PRINTF("hash table\n**********************************\n");
